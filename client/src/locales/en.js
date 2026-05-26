@@ -359,6 +359,13 @@ export default {
     noTasks: 'No tasks yet. Add your first task above!'
   },
 
+  // Theme
+  theme: {
+    label: 'Theme',
+    light: 'Light',
+    dark: 'Dark'
+  },
+
   // Language
   language: {
     english: 'English',

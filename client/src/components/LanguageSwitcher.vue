@@ -99,36 +99,37 @@ const selectLanguage = (locale) => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.875rem;
-  /* width: 100% makes the button stretch to the full width of .sidebar-footer
-     so it is a proper full-width row rather than a shrink-wrapped pill */
+  /* width: 100% stretches the button to fill .sidebar-footer width */
   width: 100%;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
   font-family: inherit;
   font-size: 0.875rem;
-  color: #334155;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 
 .language-button:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
 }
 
 .globe-icon {
-  color: #64748b;
+  color: var(--text-tertiary);
   flex-shrink: 0;
 }
 
 .language-label {
-  font-weight: 500;
+  flex: 1;
+  text-align: left;
 }
 
 .chevron {
-  color: #64748b;
-  transition: transform 0.2s ease;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-base);
   flex-shrink: 0;
 }
 
@@ -138,15 +139,14 @@ const selectLanguage = (locale) => {
 
 .dropdown-menu {
   position: absolute;
-  /* Open upward — the language switcher lives at the bottom of the sidebar,
-     so a downward menu would render below the visible area. */
+  /* Opens upward — language switcher lives at the bottom of the sidebar */
   bottom: calc(100% + 0.5rem);
   right: 0;
   min-width: 160px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
   z-index: 1000;
   overflow: hidden;
 }
@@ -162,20 +162,20 @@ const selectLanguage = (locale) => {
   border: none;
   text-align: left;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background var(--transition-fast);
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #334155;
+  color: var(--text-secondary);
 }
 
 .dropdown-item:hover {
-  background: #f8fafc;
+  background: var(--bg-hover);
 }
 
 .dropdown-item.active {
-  background: #eff6ff;
-  color: #2563eb;
+  background: var(--accent-soft-bg);
+  color: var(--accent-soft-text);
 }
 
 .language-name {
@@ -183,7 +183,7 @@ const selectLanguage = (locale) => {
 }
 
 .check-icon {
-  color: #2563eb;
+  color: var(--accent);
   flex-shrink: 0;
 }
 </style>

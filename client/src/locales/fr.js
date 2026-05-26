@@ -359,6 +359,13 @@ export default {
     noTasks: 'Aucune tâche pour le moment. Ajoutez votre première tâche ci-dessus !'
   },
 
+  // Theme
+  theme: {
+    label: 'Thème',
+    light: 'Clair',
+    dark: 'Sombre'
+  },
+
   // Language
   language: {
     english: 'Anglais',

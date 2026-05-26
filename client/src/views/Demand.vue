@@ -181,11 +181,11 @@ export default {
 
       // If change is within ±2%, consider it stable and show blue
       if (changePercent <= 2) {
-        return '#3b82f6' // Blue for stable
+        return '#3b82f6' // Blue for stable — saturated data color, kept as-is
       }
 
-      if (change > 0) return '#10b981' // Green for increasing
-      if (change < 0) return '#ef4444' // Red for decreasing
+      if (change > 0) return '#10b981' // Green for increasing — saturated data color
+      if (change < 0) return '#ef4444' // Red for decreasing — saturated data color
       return '#3b82f6' // Blue for no change
     }
 
@@ -232,17 +232,19 @@ export default {
 }
 
 .trend-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
-  transition: all 0.2s ease;
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
 .trend-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
 }
 
+/* Saturated left-border accent colors — kept as-is */
 .increasing-card {
   border-left: 4px solid #10b981;
 }
@@ -261,7 +263,7 @@ export default {
   gap: 1rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .trend-icon {
@@ -270,31 +272,31 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 1.75rem;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .increasing-card .trend-icon {
-  background: #d1fae5;
-  color: #059669;
+  background: var(--success-bg);
+  color: var(--success-text);
 }
 
 .stable-card .trend-icon {
-  background: #dbeafe;
-  color: #2563eb;
+  background: var(--info-bg);
+  color: var(--info-text);
 }
 
 .decreasing-card .trend-icon {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--danger-bg);
+  color: var(--danger-text);
 }
 
 .trend-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-tertiary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -302,7 +304,7 @@ export default {
 .trend-count {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
   margin-top: 0.25rem;
 }
 
@@ -317,18 +319,18 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  background: #f8fafc;
-  border-radius: 6px;
-  transition: background 0.2s;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
 }
 
 .trend-item:hover {
-  background: #f1f5f9;
+  background: var(--bg-hover);
 }
 
 .item-name {
   font-size: 0.875rem;
-  color: #0f172a;
+  color: var(--text-primary);
   font-weight: 500;
   flex: 1;
   overflow: hidden;
@@ -343,6 +345,7 @@ export default {
   flex-shrink: 0;
 }
 
+/* Saturated data series colors — kept as-is */
 .increasing-card .item-change {
   color: #059669;
 }
@@ -356,12 +359,12 @@ export default {
 }
 
 .item-change.neutral {
-  color: #64748b;
+  color: var(--text-tertiary);
 }
 
 .more-items {
   font-size: 0.813rem;
-  color: #64748b;
+  color: var(--text-tertiary);
   font-style: italic;
   text-align: center;
   padding: 0.5rem;

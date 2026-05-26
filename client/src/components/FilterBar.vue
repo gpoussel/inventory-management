@@ -102,12 +102,22 @@ export default {
 
 <style scoped>
 .filters-bar {
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  /* Solid fallback */
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-default);
   padding: 0.75rem 0;
   position: sticky;
   top: 0;
   z-index: 90;
+}
+
+/* Frosted-glass effect where supported */
+@supports (background: color-mix(in srgb, white 85%, transparent)) {
+  .filters-bar {
+    background: color-mix(in srgb, var(--bg-surface) 85%, transparent);
+    backdrop-filter: saturate(180%) blur(8px);
+    -webkit-backdrop-filter: saturate(180%) blur(8px);
+  }
 }
 
 .filters-container {
@@ -135,31 +145,37 @@ export default {
 .filter-group label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-tertiary);
   white-space: nowrap;
 }
 
 .filter-select {
-  padding: 0.4rem 0.75rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.4rem 2rem 0.4rem 0.75rem;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
   font-size: 0.813rem;
-  color: #0f172a;
-  background: white;
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
+  /* Inline SVG chevron — uses a neutral gray that works on both themes */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4L6 8L10 4' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   font-weight: 500;
   min-width: 140px;
 }
 
 .filter-select:hover {
-  border-color: #94a3b8;
+  border-color: var(--border-strong);
 }
 
 .filter-select:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .reset-filters-btn {
@@ -167,19 +183,19 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 0.4rem;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  color: #64748b;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
   flex-shrink: 0;
 }
 
 .reset-filters-btn:hover:not(:disabled) {
-  background: #f8fafc;
-  border-color: #cbd5e1;
-  color: #0f172a;
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
 }
 
 .reset-filters-btn:disabled {

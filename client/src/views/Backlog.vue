@@ -31,8 +31,8 @@
         <div class="card-header">
           <h3 class="card-title">{{ t('backlog.itemsTitle') }}</h3>
         </div>
-        <div v-if="backlogItems.length === 0" style="padding: 3rem; text-align: center;">
-          <p style="font-size: 1.125rem; color: #10b981; font-weight: 600;">
+        <div v-if="backlogItems.length === 0" class="empty-state">
+          <p class="empty-state-text">
             {{ t('backlog.empty') }}
           </p>
         </div>
@@ -172,11 +172,25 @@ export default {
 </script>
 
 <style scoped>
+/* Days-delayed cell uses token-based classes instead of inline hardcoded colors */
 .days-critical {
-  color: #ef4444;
+  color: var(--danger-solid);
+  font-weight: 600;
 }
 
 .days-warning {
-  color: #f59e0b;
+  color: var(--warning-solid);
+  font-weight: 600;
+}
+
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+}
+
+.empty-state-text {
+  font-size: 1.125rem;
+  color: var(--success-text);
+  font-weight: 600;
 }
 </style>

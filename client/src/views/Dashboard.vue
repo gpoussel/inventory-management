@@ -85,7 +85,7 @@
               <!-- Left: Donut Chart -->
               <div class="order-health-chart">
                 <svg viewBox="0 0 200 200" class="donut-svg-compact">
-                  <circle cx="100" cy="100" r="65" fill="none" stroke="#e2e8f0" stroke-width="25"/>
+                  <circle cx="100" cy="100" r="65" fill="none" stroke-width="25" class="donut-track"/>
                   <circle cx="100" cy="100" r="65" fill="none" stroke="#10b981" stroke-width="25"
                     :stroke-dasharray="`${getCircleSegment(statusData.delivered)} 408`"
                     stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
@@ -199,7 +199,7 @@
                     </span>
                   </td>
                   <td @click="showBacklogDetail(item)" style="cursor: pointer;">
-                    <span :style="{ color: item.days_delayed > 7 ? '#ef4444' : '#f59e0b', fontWeight: 600 }">
+                    <span :style="{ color: item.days_delayed > 7 ? 'var(--danger-solid)' : 'var(--warning-solid)', fontWeight: 600 }">
                       {{ item.days_delayed }} {{ t('dashboard.inventoryShortages.days') }}
                     </span>
                   </td>
@@ -410,8 +410,8 @@ export default {
       // Filter inventory items to only include those with orders in the selected period
       const categoryMap = {}
 
-      // Use a single neutral slate/gray color for all categories
-      const singleColor = '#64748b' // Neutral slate gray color
+      // Single neutral color for all category bars — resolved at render time via CSS variable
+      const singleColor = 'var(--text-tertiary)'
 
       // Get SKUs from orders in the filtered time period
       const orderedSkus = new Set()
@@ -738,7 +738,7 @@ export default {
 
 .header-meta {
   font-size: 0.813rem;
-  color: #64748b;
+  color: var(--text-tertiary);
 }
 
 .kpi-section {
@@ -748,7 +748,7 @@ export default {
 .section-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 1rem;
@@ -761,8 +761,8 @@ export default {
 }
 
 .kpi-card {
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
   border-radius: 10px;
   padding: 1rem;
 }
@@ -774,7 +774,7 @@ export default {
 .kpi-label {
   font-size: 0.813rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-tertiary);
   text-transform: uppercase;
   letter-spacing: 0.025em;
 }
@@ -782,28 +782,28 @@ export default {
 .kpi-value {
   font-size: 2rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   letter-spacing: -0.025em;
 }
 
 .kpi-goal {
   font-size: 0.813rem;
-  color: #64748b;
+  color: var(--text-tertiary);
   margin-bottom: 0.75rem;
 }
 
 .kpi-progress-bar {
   width: 100%;
   height: 6px;
-  background: #f1f5f9;
+  background: var(--bg-hover);
   border-radius: 3px;
   overflow: hidden;
 }
 
 .kpi-progress {
   height: 100%;
-  background: #3b82f6;
+  background: var(--accent);
   border-radius: 3px;
   transition: width 0.6s ease;
 }
@@ -850,7 +850,7 @@ export default {
   align-items: center;
   gap: 0.625rem;
   font-size: 0.875rem;
-  color: #475569;
+  color: var(--text-secondary);
 }
 
 .legend-dot {
@@ -883,9 +883,10 @@ export default {
   height: 200px;
 }
 
+/* SVG text uses fill, not color — CSS variables work in style attributes */
 .donut-center-label {
   font-size: 12px;
-  fill: #64748b;
+  fill: var(--text-tertiary);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -893,8 +894,13 @@ export default {
 
 .donut-center-value {
   font-size: 36px;
-  fill: #0f172a;
+  fill: var(--text-primary);
   font-weight: 700;
+}
+
+/* Donut track circle rendered via CSS class for theme-aware stroke */
+.donut-track {
+  stroke: var(--border-default);
 }
 
 .donut-legend-compact {
@@ -908,7 +914,7 @@ export default {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
-  color: #475569;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -930,7 +936,7 @@ export default {
 
 .health-metric-label {
   font-size: 0.688rem;
-  color: #64748b;
+  color: var(--text-tertiary);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -939,7 +945,7 @@ export default {
 .health-metric-value {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
   letter-spacing: -0.025em;
 }
 
@@ -973,14 +979,14 @@ export default {
   min-width: 120px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--text-secondary);
   flex-shrink: 0;
 }
 
 .h-bar-container {
   flex: 1;
   height: 32px;
-  background: #f8fafc;
+  background: var(--bg-subtle);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -1012,8 +1018,8 @@ export default {
   justify-content: space-between;
   padding-right: 1rem;
   font-size: 0.75rem;
-  color: #94a3b8;
-  border-right: 1px solid #e2e8f0;
+  color: var(--text-muted);
+  border-right: 1px solid var(--border-default);
 }
 
 .line-chart-area {
@@ -1054,32 +1060,32 @@ export default {
 }
 
 .line-bar.empty-bar {
-  background: #e2e8f0;
+  background: var(--border-default);
   box-shadow: none;
   min-height: 4px;
 }
 
 .line-bar:hover {
-  background: #2563eb;
+  background: var(--accent-hover);
   transform: scaleY(1.05);
 }
 
 .line-bar.empty-bar:hover {
-  background: #cbd5e1;
+  background: var(--border-strong);
   transform: none;
 }
 
 .line-bar-label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-tertiary);
   white-space: nowrap;
 }
 
 .no-data {
   padding: 2rem;
   text-align: center;
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 0.875rem;
 }
 
@@ -1095,12 +1101,12 @@ export default {
 .success-icon {
   width: 48px;
   height: 48px;
-  color: #10b981;
+  color: var(--success-solid);
 }
 
 .no-backlog-text {
   font-size: 1.125rem;
-  color: #10b981;
+  color: var(--success-text);
   font-weight: 600;
   margin: 0;
 }
@@ -1111,7 +1117,7 @@ export default {
 }
 
 .clickable-row:hover {
-  background: #eff6ff !important;
+  background: var(--accent-soft-bg) !important;
 }
 
 /* Tasks Card Styles */
@@ -1132,7 +1138,7 @@ export default {
 .task-input {
   flex: 1;
   padding: 0.75rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-default);
   border-radius: 8px;
   font-size: 0.95rem;
   transition: border-color 0.2s ease;
@@ -1140,12 +1146,12 @@ export default {
 
 .task-input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--accent);
 }
 
 .task-add-btn {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--accent-gradient);
   color: white;
   border: none;
   border-radius: 8px;
@@ -1166,7 +1172,7 @@ export default {
 .no-tasks {
   text-align: center;
   padding: 2rem;
-  color: #64748b;
+  color: var(--text-tertiary);
   font-style: italic;
 }
 
@@ -1181,15 +1187,15 @@ export default {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem;
-  background: #f8fafc;
+  background: var(--bg-subtle);
   border-radius: 8px;
   border: 2px solid transparent;
   transition: all 0.2s ease;
 }
 
 .task-item:hover {
-  border-color: #e2e8f0;
-  background: white;
+  border-color: var(--border-default);
+  background: var(--bg-surface);
 }
 
 .task-item.completed {
@@ -1198,28 +1204,28 @@ export default {
 
 .task-item.completed .task-text {
   text-decoration: line-through;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .task-checkbox {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  accent-color: #667eea;
+  accent-color: var(--accent);
 }
 
 .task-text {
   flex: 1;
   cursor: pointer;
   user-select: none;
-  color: #0f172a;
+  color: var(--text-primary);
   font-size: 0.95rem;
 }
 
 .task-delete-btn {
   width: 28px;
   height: 28px;
-  background: #ef4444;
+  background: var(--danger-solid);
   color: white;
   border: none;
   border-radius: 6px;
@@ -1234,7 +1240,7 @@ export default {
 }
 
 .task-delete-btn:hover {
-  background: #dc2626;
+  background: var(--danger-text);
   transform: scale(1.1);
 }
 
@@ -1250,24 +1256,24 @@ export default {
 }
 
 .po-button.create {
-  background: #3b82f6;
+  background: var(--accent);
   color: white;
 }
 
 .po-button.create:hover {
-  background: #2563eb;
+  background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 
 .po-button.view {
-  background: #64748b;
+  background: var(--text-tertiary);
   color: white;
 }
 
 .po-button.view:hover {
-  background: #475569;
+  background: var(--text-secondary);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(100, 116, 139, 0.3);
+  box-shadow: var(--shadow-sm);
 }
 </style>

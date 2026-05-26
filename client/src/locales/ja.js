@@ -359,6 +359,13 @@ export default {
     noTasks: 'タスクがありません。上記からタスクを追加してください！'
   },
 
+  // Theme
+  theme: {
+    label: 'テーマ',
+    light: 'ライト',
+    dark: 'ダーク'
+  },
+
   // Language
   language: {
     english: 'English',
