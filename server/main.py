@@ -120,6 +120,30 @@ class CreatePurchaseOrderRequest(BaseModel):
     expected_delivery_date: str
     notes: Optional[str] = None
 
+class Task(BaseModel):
+    id: str
+    title: str
+    priority: str
+    due_date: Optional[str] = None
+    status: str
+
+class CreateTaskRequest(BaseModel):
+    title: str
+    priority: str = "medium"
+    due_date: Optional[str] = None
+
+# In-memory task store. Tasks created via the API live only for the
+# lifetime of the server process — matches the rest of the demo's
+# "no database" pattern.
+api_tasks: List[dict] = []
+_next_task_id = 1
+
+def _allocate_task_id() -> str:
+    global _next_task_id
+    task_id = f"api-task-{_next_task_id}"
+    _next_task_id += 1
+    return task_id
+
 # API endpoints
 @app.get("/")
 def root():
@@ -303,6 +327,42 @@ def get_monthly_trends():
     result = list(months.values())
     result.sort(key=lambda x: x['month'])
     return result
+
+@app.get("/api/tasks", response_model=List[Task])
+def get_tasks():
+    """Get all user-created tasks."""
+    return api_tasks
+
+@app.post("/api/tasks", response_model=Task)
+def create_task(payload: CreateTaskRequest):
+    """Create a new task."""
+    new_task = {
+        "id": _allocate_task_id(),
+        "title": payload.title,
+        "priority": payload.priority,
+        "due_date": payload.due_date,
+        "status": "pending",
+    }
+    api_tasks.append(new_task)
+    return new_task
+
+@app.delete("/api/tasks/{task_id}")
+def delete_task(task_id: str):
+    """Delete a task."""
+    task = next((t for t in api_tasks if t["id"] == task_id), None)
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    api_tasks.remove(task)
+    return {"ok": True}
+
+@app.patch("/api/tasks/{task_id}", response_model=Task)
+def toggle_task(task_id: str):
+    """Toggle a task's status between pending and completed."""
+    task = next((t for t in api_tasks if t["id"] == task_id), None)
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    task["status"] = "completed" if task["status"] == "pending" else "pending"
+    return task
 
 if __name__ == "__main__":
     import uvicorn

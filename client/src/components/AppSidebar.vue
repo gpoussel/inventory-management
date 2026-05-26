@@ -22,7 +22,7 @@
         {{ t('nav.demandForecast') }}
       </router-link>
       <router-link to="/reports" :class="{ 'nav-active': $route.path === '/reports' }">
-        Reports
+        {{ t('nav.reports') }}
       </router-link>
     </nav>
 
@@ -63,7 +63,10 @@ export default {
   flex-direction: column;
   background: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border);
-  overflow-y: auto;
+  /* overflow: visible so the ProfileMenu / LanguageSwitcher dropdowns can
+     escape the sidebar instead of being clipped or forcing internal scroll.
+     The sidebar's content fits easily within 100vh on any normal viewport. */
+  overflow: visible;
 }
 
 .sidebar-brand {
@@ -118,7 +121,9 @@ export default {
   padding: 10px 8px;
   border-top: 1px solid var(--sidebar-border);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  /* Stack LanguageSwitcher above ProfileMenu vertically so both fit the
+     narrow sidebar width instead of being crammed onto one horizontal line */
+  flex-direction: column;
+  gap: 6px;
 }
 </style>
