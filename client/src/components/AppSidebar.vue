@@ -63,6 +63,9 @@
         </svg>
         {{ t('nav.reports') }}
       </router-link>
+      <router-link to="/backlog" :class="{ 'nav-active': $route.path === '/backlog' }">
+        {{ t('nav.backlog') }}
+      </router-link>
     </nav>
 
     <div class="sidebar-footer">

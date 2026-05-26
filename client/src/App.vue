@@ -50,10 +50,21 @@ export default {
     const showProfileDetails = ref(false)
     const showTasks = ref(false)
     const apiTasks = ref([])
+    // Track mutations to mock tasks reactively, since currentUser is a computed
+    // whose tasks array is recreated on each evaluation — direct splice/assignment
+    // on that array doesn't trigger Vue reactivity.
+    const deletedMockTaskIds = ref(new Set())
+    const mockTaskStatuses = ref({})
 
     // Merge mock tasks from currentUser with API tasks
     const tasks = computed(() => {
-      return [...currentUser.value.tasks, ...apiTasks.value]
+      const mockTasks = currentUser.value.tasks
+        .filter(t => !deletedMockTaskIds.value.has(t.id))
+        .map(t => mockTaskStatuses.value[t.id] !== undefined
+          ? { ...t, status: mockTaskStatuses.value[t.id] }
+          : t
+        )
+      return [...mockTasks, ...apiTasks.value]
     })
 
     const loadTasks = async () => {
@@ -80,11 +91,7 @@ export default {
         const isMockTask = currentUser.value.tasks.some(t => t.id === taskId)
 
         if (isMockTask) {
-          // Remove from mock tasks
-          const index = currentUser.value.tasks.findIndex(t => t.id === taskId)
-          if (index !== -1) {
-            currentUser.value.tasks.splice(index, 1)
-          }
+          deletedMockTaskIds.value = new Set([...deletedMockTaskIds.value, taskId])
         } else {
           // Remove from API tasks
           await api.deleteTask(taskId)
@@ -101,8 +108,9 @@ export default {
         const mockTask = currentUser.value.tasks.find(t => t.id === taskId)
 
         if (mockTask) {
-          // Toggle mock task status
-          mockTask.status = mockTask.status === 'pending' ? 'completed' : 'pending'
+          // Resolve current status (may have been toggled before) then flip it
+          const current = mockTaskStatuses.value[taskId] ?? mockTask.status
+          mockTaskStatuses.value = { ...mockTaskStatuses.value, [taskId]: current === 'pending' ? 'completed' : 'pending' }
         } else {
           // Toggle API task
           const updatedTask = await api.toggleTask(taskId)

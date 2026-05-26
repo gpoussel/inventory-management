@@ -7,6 +7,7 @@ export default {
     finance: 'Finance',
     demandForecast: 'Prévision de la demande',
     reports: 'Rapports',
+    backlog: 'En attente',
     companyName: 'Catalyst Components',
     subtitle: 'Système de gestion des stocks'
   },
@@ -214,6 +215,31 @@ export default {
       change: 'Variation',
       trend: 'Tendance',
       period: 'Période'
+    }
+  },
+
+  // Backlog
+  backlog: {
+    title: 'Gestion des arriérés',
+    description: 'Suivre et résoudre les ruptures de stock',
+    loading: 'Chargement des arriérés...',
+    highPriority: 'Priorité haute',
+    mediumPriority: 'Priorité moyenne',
+    lowPriority: 'Priorité basse',
+    totalItems: 'Total des éléments en attente',
+    itemsTitle: 'Éléments en attente',
+    empty: 'Aucun élément en attente - toutes les commandes peuvent être exécutées !',
+    unitsShort: '{count} unités manquantes',
+    days: '{count} jours',
+    table: {
+      orderId: 'ID commande',
+      sku: 'SKU',
+      itemName: 'Nom de l\'article',
+      quantityNeeded: 'Quantité nécessaire',
+      quantityAvailable: 'Quantité disponible',
+      shortage: 'Manque',
+      daysDelayed: 'Jours de retard',
+      priority: 'Priorité'
     }
   },
 

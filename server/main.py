@@ -24,11 +24,13 @@ def filter_by_month(items: list, month: Optional[str]) -> list:
         if month in QUARTER_MAP:
             months = QUARTER_MAP[month]
             return [item for item in items if any(m in item.get('order_date', '') for m in months)]
+        # Unknown quarter (e.g. "Q5-2025"): return no matches, mirroring the
+        # behavior of an unknown direct month so invalid input never silently
+        # widens the result set to all items.
+        return []
     else:
         # Direct month match
         return [item for item in items if month in item.get('order_date', '')]
-
-    return items
 
 def apply_filters(items: list, warehouse: Optional[str] = None, category: Optional[str] = None,
                  status: Optional[str] = None) -> list:
