@@ -125,6 +125,9 @@ const handleLogout = () => {
   align-items: center;
   gap: 0.625rem;
   padding: 0.5rem 0.875rem;
+  /* width: 100% makes the button stretch to the full width of .sidebar-footer
+     so it is a proper full-width row rather than a shrink-wrapped pill */
+  width: 100%;
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -141,6 +144,9 @@ const handleLogout = () => {
 .avatar {
   width: 32px;
   height: 32px;
+  /* flex-shrink: 0 prevents the avatar from being compressed into an oval
+     when the parent .profile-button is inside a narrow flex container */
+  flex-shrink: 0;
   border-radius: 50%;
   background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
   color: white;
@@ -169,8 +175,13 @@ const handleLogout = () => {
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
+  /* Anchored above the trigger because the profile button lives at the
+     bottom of the sidebar — opening upward keeps the menu inside the
+     viewport without scrolling. */
+  bottom: calc(100% + 0.5rem);
+  /* left: 0 lets the menu extend rightward into the main content area
+     since its 280px min-width is wider than the 240px sidebar. */
+  left: 0;
   min-width: 280px;
   background: white;
   border: 1px solid #e2e8f0;

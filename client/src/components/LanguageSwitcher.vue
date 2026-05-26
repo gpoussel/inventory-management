@@ -64,7 +64,8 @@ const isDropdownOpen = ref(false)
 
 const languageNames = {
   en: 'English',
-  ja: '日本語'
+  ja: '日本語',
+  fr: 'Français'
 }
 
 const getLanguageName = (locale) => {
@@ -98,6 +99,9 @@ const selectLanguage = (locale) => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.875rem;
+  /* width: 100% makes the button stretch to the full width of .sidebar-footer
+     so it is a proper full-width row rather than a shrink-wrapped pill */
+  width: 100%;
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -134,7 +138,9 @@ const selectLanguage = (locale) => {
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  /* Open upward — the language switcher lives at the bottom of the sidebar,
+     so a downward menu would render below the visible area. */
+  bottom: calc(100% + 0.5rem);
   right: 0;
   min-width: 160px;
   background: white;

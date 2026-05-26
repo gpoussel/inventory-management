@@ -50,5 +50,8 @@ logs/
 # Playwright MCP artifacts
 .playwright-mcp/
 
+# Git worktrees
+.worktrees/
+
 # Environment variables
 .env
