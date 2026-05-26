@@ -64,6 +64,11 @@
         {{ t('nav.reports') }}
       </router-link>
       <router-link to="/backlog" :class="{ 'nav-active': $route.path === '/backlog' }">
+        <!-- Clock icon — represents delayed / pending items -->
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="nav-icon">
+          <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 4.5V8L10.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         {{ t('nav.backlog') }}
       </router-link>
     </nav>
