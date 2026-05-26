@@ -83,6 +83,22 @@ class TestDashboardEndpoints:
         data = response.json()
         assert isinstance(data, dict)
 
+    def test_dashboard_summary_with_invalid_quarter_returns_empty(self, client):
+        """Invalid quarter values must not silently widen results to all orders.
+
+        Regression: an unknown quarter such as 'Q5-2025' previously fell
+        through the quarter branch and returned the unfiltered set, while an
+        unknown direct month like '2025-13' correctly returned no matches.
+        """
+        no_filter = client.get("/api/dashboard/summary").json()
+        invalid_quarter = client.get("/api/dashboard/summary?month=Q5-2025").json()
+
+        # Unknown quarter should yield no matching orders, mirroring unknown month
+        assert invalid_quarter["pending_orders"] == 0
+        assert invalid_quarter["total_orders_value"] == 0
+        # And must not equal the unfiltered totals
+        assert invalid_quarter["total_orders_value"] != no_filter["total_orders_value"]
+
     def test_dashboard_summary_with_multiple_filters(self, client):
         """Test dashboard summary with multiple filters."""
         response = client.get(
