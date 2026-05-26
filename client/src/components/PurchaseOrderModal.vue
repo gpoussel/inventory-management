@@ -351,9 +351,10 @@ const formatDate = (dateString) => {
 }
 
 .modal-container {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
   max-width: 580px;
   width: 100%;
   max-height: 90vh;
@@ -367,32 +368,32 @@ const formatDate = (dateString) => {
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border-default);
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
   letter-spacing: -0.025em;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--text-tertiary);
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  transition: all 0.15s ease;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
 }
 
 .close-button:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--bg-hover);
+  color: var(--text-primary);
 }
 
 .modal-body {
@@ -405,9 +406,9 @@ const formatDate = (dateString) => {
   display: flex;
   gap: 1.5rem;
   padding: 0.875rem 1rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
@@ -423,22 +424,22 @@ const formatDate = (dateString) => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .context-value {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .context-value.sku {
   font-family: 'Monaco', 'Courier New', monospace;
-  color: #2563eb;
+  color: var(--accent);
 }
 
 .context-value.shortage {
-  color: #dc2626;
+  color: var(--danger-text);
 }
 
 /* Form styles */
@@ -463,57 +464,58 @@ const formatDate = (dateString) => {
 .form-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--text-secondary);
 }
 
 .required {
-  color: #dc2626;
+  color: var(--danger-solid);
 }
 
 .form-input {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
-  color: #0f172a;
+  color: var(--text-primary);
   font-family: inherit;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  background: white;
+  background: var(--bg-surface);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .form-input:disabled {
-  background: #f1f5f9;
-  color: #94a3b8;
+  background: var(--bg-hover);
+  color: var(--text-muted);
   cursor: not-allowed;
 }
 
 .form-textarea {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
-  color: #0f172a;
+  color: var(--text-primary);
   font-family: inherit;
   resize: vertical;
   min-height: 72px;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: var(--bg-surface);
 }
 
 .form-textarea:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .form-textarea:disabled {
-  background: #f1f5f9;
-  color: #94a3b8;
+  background: var(--bg-hover);
+  color: var(--text-muted);
   cursor: not-allowed;
 }
 
@@ -522,37 +524,37 @@ const formatDate = (dateString) => {
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 8px;
+  background: var(--info-bg);
+  border: 1px solid var(--info-bg);
+  border-radius: var(--radius-md);
 }
 
 .total-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #1e40af;
+  color: var(--info-text);
 }
 
 .total-value {
   font-size: 1rem;
   font-weight: 700;
-  color: #1e40af;
+  color: var(--info-text);
 }
 
 .error-message {
   padding: 0.75rem 1rem;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 6px;
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-bg);
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
-  color: #dc2626;
+  color: var(--danger-text);
 }
 
 /* View mode styles */
 .view-loading {
   padding: 2rem;
   text-align: center;
-  color: #64748b;
+  color: var(--text-tertiary);
   font-size: 0.875rem;
 }
 
@@ -573,14 +575,14 @@ const formatDate = (dateString) => {
   flex-direction: column;
   gap: 0.375rem;
   padding: 0.875rem 1rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
 }
 
 .detail-item.highlight {
-  background: #eff6ff;
-  border-color: #bfdbfe;
+  background: var(--info-bg);
+  border-color: var(--info-bg);
 }
 
 .detail-item.full-width {
@@ -592,64 +594,64 @@ const formatDate = (dateString) => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b;
+  color: var(--text-tertiary);
 }
 
 .detail-value {
   font-size: 0.938rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .detail-value.total {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #1e40af;
+  color: var(--info-text);
 }
 
 .detail-value.notes {
-  color: #475569;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
 .status-badge {
   display: inline-block;
   padding: 0.25rem 0.625rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   font-size: 0.813rem;
   font-weight: 600;
   text-transform: capitalize;
 }
 
 .status-badge.pending {
-  background: #fef3c7;
-  color: #92400e;
+  background: var(--warning-bg);
+  color: var(--warning-text);
 }
 
 .status-badge.approved {
-  background: #dbeafe;
-  color: #1e40af;
+  background: var(--info-bg);
+  color: var(--info-text);
 }
 
 .status-badge.ordered {
-  background: #e0f2fe;
-  color: #0369a1;
+  background: var(--info-bg);
+  color: var(--info-text);
 }
 
 .status-badge.received {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--success-bg);
+  color: var(--success-text);
 }
 
 .status-badge.cancelled {
-  background: #f1f5f9;
-  color: #475569;
+  background: var(--bg-hover);
+  color: var(--text-secondary);
 }
 
 /* Modal footer */
 .modal-footer {
   padding: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--border-default);
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
@@ -657,20 +659,20 @@ const formatDate = (dateString) => {
 
 .btn-secondary {
   padding: 0.625rem 1.25rem;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
   font-weight: 500;
   font-size: 0.875rem;
-  color: #334155;
+  color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: var(--transition-fast);
   font-family: inherit;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
 }
 
 .btn-secondary:disabled {
@@ -680,20 +682,20 @@ const formatDate = (dateString) => {
 
 .btn-primary {
   padding: 0.625rem 1.25rem;
-  background: #2563eb;
-  border: 1px solid #2563eb;
-  border-radius: 8px;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
   font-weight: 500;
   font-size: 0.875rem;
   color: white;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: var(--transition-fast);
   font-family: inherit;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .btn-primary:disabled {

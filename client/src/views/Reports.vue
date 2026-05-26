@@ -312,12 +312,20 @@ export default {
   padding: 0;
 }
 
+/* Local card override — Reports.vue uses its own card definition that predates
+   the global .card token. Keeping it scoped so it doesn't conflict. */
 .card {
-  background: white;
-  border-radius: 12px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-xs);
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
 }
 
 .card-header {
@@ -327,7 +335,7 @@ export default {
 .card-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -337,21 +345,22 @@ export default {
 }
 
 .reports-table th {
-  background: #f8fafc;
+  background: var(--bg-subtle);
   padding: 0.75rem;
   text-align: left;
   font-weight: 600;
-  color: #64748b;
-  border-bottom: 2px solid #e2e8f0;
+  color: var(--text-tertiary);
+  border-bottom: 2px solid var(--border-default);
 }
 
 .reports-table td {
   padding: 0.75rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border-default);
+  color: var(--text-secondary);
 }
 
 .reports-table tr:hover {
-  background: #f8fafc;
+  background: var(--bg-hover);
 }
 
 .chart-container {
@@ -382,6 +391,7 @@ export default {
   width: 100%;
 }
 
+/* Saturated data series gradient — kept as-is */
 .bar {
   width: 100%;
   background: linear-gradient(to top, #3b82f6, #60a5fa);
@@ -395,15 +405,15 @@ export default {
 }
 
 .bar-label {
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-tertiary);
   text-align: center;
   transform: rotate(-45deg);
   white-space: nowrap;
-  margin-top: 1.5rem;
 }
 
+/* Local stats-grid override — slightly different minmax than global */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -412,68 +422,40 @@ export default {
 }
 
 .stat-card {
-  background: white;
-  border-radius: 12px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #3b82f6;
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-xs);
+  border-left: 4px solid var(--accent);
+}
+
+.stat-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
 }
 
 .stat-label {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--text-tertiary);
   margin-bottom: 0.5rem;
 }
 
 .stat-value {
   font-size: 1.875rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
-.badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.badge.success {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.badge.warning {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.badge.danger {
-  background: #fee2e2;
-  color: #991b1b;
-}
+/* Badge styles delegated to global .badge.success/warning/danger tokens */
 
 .positive-change {
-  color: #16a34a;
+  color: var(--success-text);
   font-weight: 600;
 }
 
 .negative-change {
-  color: #dc2626;
+  color: var(--danger-text);
   font-weight: 600;
-}
-
-.loading {
-  text-align: center;
-  padding: 3rem;
-  color: #64748b;
-}
-
-.error {
-  background: #fee2e2;
-  color: #991b1b;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
 }
 </style>

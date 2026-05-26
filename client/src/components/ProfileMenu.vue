@@ -125,31 +125,29 @@ const handleLogout = () => {
   align-items: center;
   gap: 0.625rem;
   padding: 0.5rem 0.875rem;
-  /* width: 100% makes the button stretch to the full width of .sidebar-footer
-     so it is a proper full-width row rather than a shrink-wrapped pill */
+  /* width: 100% stretches the button to fill .sidebar-footer width */
   width: 100%;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
   font-family: inherit;
 }
 
 .profile-button:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
 }
 
 .avatar {
   width: 32px;
   height: 32px;
-  /* flex-shrink: 0 prevents the avatar from being compressed into an oval
-     when the parent .profile-button is inside a narrow flex container */
+  /* flex-shrink: 0 prevents the avatar from being squashed in a narrow flex container */
   flex-shrink: 0;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  color: white;
+  background: var(--accent-gradient);
+  color: var(--text-inverse);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,12 +159,18 @@ const handleLogout = () => {
 .profile-name {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--text-primary);
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .chevron {
-  color: #64748b;
-  transition: transform 0.2s ease;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-base);
+  flex-shrink: 0;
 }
 
 .chevron-open {
@@ -175,18 +179,14 @@ const handleLogout = () => {
 
 .dropdown-menu {
   position: absolute;
-  /* Anchored above the trigger because the profile button lives at the
-     bottom of the sidebar — opening upward keeps the menu inside the
-     viewport without scrolling. */
+  /* Opens upward — profile button lives at the bottom of the sidebar */
   bottom: calc(100% + 0.5rem);
-  /* left: 0 lets the menu extend rightward into the main content area
-     since its 280px min-width is wider than the 240px sidebar. */
   left: 0;
   min-width: 280px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
   z-index: 1000;
   overflow: hidden;
 }
@@ -196,15 +196,15 @@ const handleLogout = () => {
   display: flex;
   gap: 0.875rem;
   align-items: center;
-  background: #f8fafc;
+  background: var(--bg-subtle);
 }
 
 .avatar-large {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  color: white;
+  background: var(--accent-gradient);
+  color: var(--text-inverse);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,14 +221,14 @@ const handleLogout = () => {
 
 .user-name {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--text-primary);
   font-size: 0.938rem;
   margin-bottom: 0.25rem;
 }
 
 .user-email {
   font-size: 0.813rem;
-  color: #64748b;
+  color: var(--text-tertiary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -236,7 +236,7 @@ const handleLogout = () => {
 
 .dropdown-divider {
   height: 1px;
-  background: #e2e8f0;
+  background: var(--border-default);
   margin: 0.5rem 0;
 }
 
@@ -250,42 +250,42 @@ const handleLogout = () => {
   border: none;
   text-align: left;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background var(--transition-fast);
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #334155;
+  color: var(--text-secondary);
 }
 
 .dropdown-item:hover {
-  background: #f8fafc;
+  background: var(--bg-hover);
 }
 
 .dropdown-item svg {
-  color: #64748b;
+  color: var(--text-tertiary);
   flex-shrink: 0;
 }
 
 .dropdown-item.logout {
-  color: #dc2626;
+  color: var(--danger-solid);
 }
 
 .dropdown-item.logout svg {
-  color: #dc2626;
+  color: var(--danger-solid);
 }
 
 .dropdown-item.logout:hover {
-  background: #fef2f2;
+  background: var(--danger-bg);
 }
 
 .task-badge {
   margin-left: auto;
-  background: #2563eb;
-  color: white;
+  background: var(--accent);
+  color: var(--text-inverse);
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.125rem 0.5rem;
-  border-radius: 12px;
+  border-radius: var(--radius-pill);
   min-width: 20px;
   text-align: center;
 }
